@@ -14,6 +14,6 @@
 
 ## Ek bilgiler
 
-> #Not1:
+> # Not1:
 Raporlama için allure report kullanılmıştır. Test çalıştıktan sonra otomatik olarak "Seleniumproject" altında <b>Allure-results</b> dosyası oluşacaktır. Terminalden projesenin bulunduğu dizinde <b>Allure serve allure-results</b> yazarak test raporlarına ulaşılabilir.
 
