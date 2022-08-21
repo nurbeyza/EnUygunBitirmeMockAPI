@@ -1,25 +1,29 @@
 package MockAPI;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import groovy.util.logging.Slf4j;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-import org.testng.Assert;
 
 import static io.restassured.RestAssured.baseURI;
 import static io.restassured.RestAssured.given;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
-public class MockAPIrestAssured {
+@Slf4j
+public class MockAPIRestAssured {
 
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(MockAPIRestAssured.class);
     Response response;
 
 
-    public MockAPIrestAssured(){
+    //Yapıcı kullanırak baseURI oluşturuldu. Tüm fonksiyonlarda yapıcı üzerinden kullanılır.
+    public MockAPIRestAssured(){
         baseURI="https://lgoqg.mocklab.io/";
     }
+
+    //Stok fiyat bilgisi dönen bir endpoint
     @Test(priority = 1)
     public void getallGrocery(){
+        log.info("tok fiyat bilgisi dönen bir endpoint");
+
         response = given()
                 .header("Content-Type","application/json")
                 .when()
@@ -31,12 +35,14 @@ public class MockAPIrestAssured {
                 .extract().response();
 
         String body=response.getBody().asString();
-        System.out.println(body);
+
     }
 
 
+    // İsme göre cevap dönen bir endpoint
     @Test(priority = 2)
     public void getNameGrocery(){
+        log.info("İsme göre cevap dönen bir endpoint");
 
         response= given()
                 .accept(ContentType.JSON)
@@ -47,14 +53,15 @@ public class MockAPIrestAssured {
                 .statusCode(200)
                 .extract().response();
         String body=response.getBody().asString();
-        System.out.println(body);
+
 
     }
 
 
-
+    //Yeni bir ürün eklenen endpoint
     @Test(priority = 3)
     public void addGrocery(){
+        log.info("Yeni bir ürün eklenen endpoint");
 
         response = given()
                 .header("Content-Type","application/x-www-form-urlencoded")
